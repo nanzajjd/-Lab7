@@ -1,4 +1,4 @@
-﻿namespace Lab7;
+namespace Lab7;
 
 class Program
 {
@@ -6,13 +6,11 @@ class Program
     {
         FloatLinkedList list = new FloatLinkedList();
 
-        Console.Write("Введіть кількість елементів: ");
-        int count = int.Parse(Console.ReadLine()!);
+        int count = ReadCount("Введіть кількість елементів: ");
 
         for (int i = 0; i < count; i++)
         {
-            Console.Write($"Введіть елемент {i + 1}: ");
-            float value = float.Parse(Console.ReadLine()!);
+            float value = ReadFloat($"Введіть елемент {i + 1}: ");
 
             if (i < 2)
             {
@@ -24,9 +22,13 @@ class Program
             }
         }
 
-    
-
         Console.WriteLine();
+
+        if (list.IsEmpty)
+        {
+            Console.WriteLine("Список порожній, подальші обчислення неможливі.");
+            return;
+        }
 
         float average = list.GetAverage();
         Console.WriteLine($"Середнє арифметичне елементів списку: {average}");
@@ -60,5 +62,39 @@ class Program
         }
 
         Console.WriteLine();
+    }
+
+    /// <summary>Зчитує з консолі невід'ємну кількість елементів, повторюючи запит при некоректному вводі.</summary>
+    private static int ReadCount(string prompt)
+    {
+        while (true)
+        {
+            Console.Write(prompt);
+            string? input = Console.ReadLine();
+
+            if (int.TryParse(input, out int count) && count >= 0)
+            {
+                return count;
+            }
+
+            Console.WriteLine("Помилка: введіть ціле невід'ємне число.");
+        }
+    }
+
+    /// <summary>Зчитує з консолі число типу float, повторюючи запит при некоректному вводі.</summary>
+    private static float ReadFloat(string prompt)
+    {
+        while (true)
+        {
+            Console.Write(prompt);
+            string? input = Console.ReadLine();
+
+            if (float.TryParse(input, out float value))
+            {
+                return value;
+            }
+
+            Console.WriteLine("Помилка: введіть дійсне число.");
+        }
     }
 }
