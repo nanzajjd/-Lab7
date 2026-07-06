@@ -2,15 +2,10 @@ using System.Collections;
 
 namespace Lab7;
 
-/// <summary>
-/// Односпрямований список елементів типу float.
-/// Новий елемент (починаючи з третього) додається одразу після другого елемента списку.
-/// </summary>
 public class FloatLinkedList : IEnumerable<float>
 {
     private Node? head;
 
-    /// <summary>Кількість елементів у списку.</summary>
     public int Count
     {
         get
@@ -28,10 +23,8 @@ public class FloatLinkedList : IEnumerable<float>
         }
     }
 
-    /// <summary>Чи порожній список.</summary>
     public bool IsEmpty => head == null;
 
-    /// <summary>Додає елемент у кінець списку.</summary>
     public void Add(float value)
     {
         Node newNode = new Node(value);
@@ -52,11 +45,6 @@ public class FloatLinkedList : IEnumerable<float>
         current.Next = newNode;
     }
 
-    /// <summary>
-    /// Додає елемент одразу після другого елемента списку.
-    /// Якщо список порожній — новий елемент стає першим.
-    /// Якщо в списку лише один елемент — новий елемент стає другим.
-    /// </summary>
     public void InsertAfterSecond(float value)
     {
         Node newNode = new Node(value);
@@ -77,7 +65,6 @@ public class FloatLinkedList : IEnumerable<float>
         head.Next.Next = newNode;
     }
 
-    /// <summary>Виводить елементи списку в один рядок.</summary>
     public void Print()
     {
         if (head == null)
@@ -97,7 +84,6 @@ public class FloatLinkedList : IEnumerable<float>
         Console.WriteLine();
     }
 
-    /// <summary>Повертає перший від'ємний елемент списку, або null, якщо такого немає.</summary>
     public float? FindFirstNegative()
     {
         Node? current = head;
@@ -115,8 +101,6 @@ public class FloatLinkedList : IEnumerable<float>
         return null;
     }
 
-    /// <summary>Повертає середнє арифметичне елементів списку.</summary>
-    /// <exception cref="InvalidOperationException">Якщо список порожній.</exception>
     public float GetAverage()
     {
         if (head == null)
@@ -139,7 +123,6 @@ public class FloatLinkedList : IEnumerable<float>
         return sum / count;
     }
 
-    /// <summary>Повертає суму елементів, більших за середнє значення списку.</summary>
     public float SumGreaterThanAverage()
     {
         if (head == null)
@@ -165,7 +148,6 @@ public class FloatLinkedList : IEnumerable<float>
         return sum;
     }
 
-    /// <summary>Створює та повертає новий список, що складається лише з додатних елементів поточного.</summary>
     public FloatLinkedList GetPositiveElements()
     {
         FloatLinkedList newList = new FloatLinkedList();
@@ -185,7 +167,6 @@ public class FloatLinkedList : IEnumerable<float>
         return newList;
     }
 
-    /// <summary>Видаляє з поточного списку всі від'ємні елементи.</summary>
     public void RemoveNegativeElements()
     {
         while (head != null && head.Value < 0)
@@ -208,8 +189,6 @@ public class FloatLinkedList : IEnumerable<float>
         }
     }
 
-    /// <summary>Доступ до елемента списку за індексом (0-базований).</summary>
-    /// <exception cref="IndexOutOfRangeException">Якщо індекс від'ємний або виходить за межі списку.</exception>
     public float this[int index]
     {
         get
